@@ -1,0 +1,4 @@
+interface:
+  display_name: "Minimal R"
+  short_description: "Write extremely simple Base R first analysis scripts."
+  default_prompt: "Use minimal-r style: Base R first, flat script, sparse comments, direct output."
