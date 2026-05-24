@@ -1,0 +1,21 @@
+.DS_Store
+Thumbs.db
+
+# R session files
+.Rhistory
+.RData
+.Ruserdata
+
+# R project/user files
+.Rproj.user/
+
+# Rendered outputs and local scratch files
+*.html
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.csv
+*.xlsx
+tmp/
+temp/
