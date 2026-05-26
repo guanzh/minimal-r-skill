@@ -1,0 +1,4 @@
+interface:
+  display_name: "R Suite"
+  short_description: "Unified minimal R scripting, review, modeling, and plotting."
+  default_prompt: "Use r-suite: infer the R task mode and write the simplest clear R code."
