@@ -1,6 +1,6 @@
-# Minimal R Skill
+# R Suite
 
-`minimal-r` is a Codex skill for writing and refactoring R code in an extremely simple analyst-script style.
+`r-suite` is the recommended single entry point for R work. It merges the previous minimal R style, simple statistical scripting, review, refactoring, modeling, plotting, and light performance guidance into one skill so you do not need to choose among many R skills.
 
 It prioritizes:
 
@@ -15,10 +15,10 @@ It prioritizes:
 
 ## Install
 
-Copy the `minimal-r` folder into your Codex skills directory:
+Copy the `r-suite` folder into your Codex skills directory:
 
 ```powershell
-Copy-Item -Recurse -Force .\minimal-r "$env:USERPROFILE\.codex\skills\minimal-r"
+Copy-Item -Recurse -Force .\r-suite "$env:USERPROFILE\.codex\skills\r-suite"
 ```
 
 Restart Codex after installing or updating the skill so the skill index refreshes.
@@ -28,21 +28,25 @@ Restart Codex after installing or updating the skill so the skill index refreshe
 Examples:
 
 ```text
-Use minimal-r to write an R script that reads data.csv and summarizes score by group.
+Use r-suite to write an R script that reads data.csv and summarizes score by group.
 ```
 
 ```text
-Use minimal-r to simplify this R script. Keep the output the same.
+Use r-suite to simplify this R script. Keep the output the same.
 ```
 
 ```text
-用 minimal-r 风格写一个 R 脚本，读取 Excel 表格并统计各物种的独立事件数。
+用 r-suite 写一个 R 脚本，读取 Excel 表格并统计各物种的独立事件数。
 ```
 
 ## Repository Layout
 
 ```text
 minimal-r-skill/
+  r-suite/
+    SKILL.md
+    agents/
+      openai.yaml
   minimal-r/
     SKILL.md
     agents/
@@ -52,10 +56,10 @@ minimal-r-skill/
   .gitignore
 ```
 
-Only the `minimal-r/` folder is the Codex skill. The root files are for GitHub packaging and human installation.
+Use `r-suite/` as the primary Codex skill. `minimal-r/` is retained as a legacy minimal entry for compatibility.
 
 ## Notes
 
-This skill intentionally does not include scripts, templates, or large references. Its job is style control: keep R code direct, readable, and statistically auditable.
+This suite intentionally does not include scripts, templates, or large references. Its job is style control: keep R code direct, readable, and statistically auditable.
 
 It selectively borrows readable style practices from the tidyverse style guide, such as spacing, clear names, native pipes, sparse comments, and readable ggplot layout, while rejecting project-heavy defaults that would make small analysis scripts larger than needed.
