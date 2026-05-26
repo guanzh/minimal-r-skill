@@ -7,6 +7,7 @@ It prioritizes:
 - Base R first
 - Flat top-to-bottom scripts
 - Sparse comments
+- Explicit missing-value handling where it matters
 - Direct printed, plotted, or saved output
 - Minimal helper functions
 - No `install.packages()` boilerplate
@@ -56,3 +57,5 @@ Only the `minimal-r/` folder is the Codex skill. The root files are for GitHub p
 ## Notes
 
 This skill intentionally does not include scripts, templates, or large references. Its job is style control: keep R code direct, readable, and statistically auditable.
+
+It selectively borrows readable style practices from the tidyverse style guide, such as spacing, clear names, native pipes, sparse comments, and readable ggplot layout, while rejecting project-heavy defaults that would make small analysis scripts larger than needed.
