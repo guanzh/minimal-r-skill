@@ -158,6 +158,7 @@ ggsave("score_by_group.png", p, width = 7, height = 5)
 minimal-r-skill/
   r-suite/
     SKILL.md
+    test-prompts.json
     agents/
       openai.yaml
   minimal-r/
@@ -174,5 +175,7 @@ Use `r-suite/` as the primary Codex skill. `minimal-r/` is retained as a legacy 
 ## Notes
 
 This suite intentionally does not include scripts, templates, or large references. Its job is style control: keep R code direct, readable, and statistically auditable.
+
+`r-suite/test-prompts.json` is a small regression set for future optimization. Use it to check that updates still produce tiny Base R answers, direct refactors, and one-question clarification when modeling details are missing.
 
 It selectively borrows readable style practices from the tidyverse style guide, such as spacing, clear names, native pipes, sparse comments, and readable ggplot layout, while rejecting project-heavy defaults that would make small analysis scripts larger than needed.
