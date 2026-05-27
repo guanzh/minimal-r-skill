@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mean_base_r",
+    "prompt": "Use r-suite to read data.csv and calculate the mean of score, ignoring missing values.",
+    "expected": "A tiny Base R script using read.csv() and mean(..., na.rm = TRUE), with no custom function, install.packages(), or dplyr."
+  },
+  {
+    "id": "group_summary",
+    "prompt": "用 r-suite 写一个 R 脚本，读取 data.csv，按 group 汇总 score 的样本量、均值和标准差。",
+    "expected": "A flat script, preferably Base R aggregate() or another short direct approach, with explicit missing-value handling and direct printed output."
+  },
+  {
+    "id": "refactor_overbuilt",
+    "prompt": "Use r-suite to simplify an R script that wraps a one-off CSV summary in functions, file checks, install.packages(), and tidyverse calls. Keep the output the same.",
+    "expected": "A shorter top-to-bottom script that removes setup boilerplate and unnecessary helper functions while preserving inputs and outputs."
+  },
+  {
+    "id": "model_clarification",
+    "prompt": "Use r-suite to fit a regression model to my table, but I have not said the outcome variable or predictors.",
+    "expected": "One concise clarification question rather than a speculative model or a long modeling template."
+  }
+]
