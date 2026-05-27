@@ -1,6 +1,6 @@
 ---
 name: r-suite
-description: Unified R coding suite for writing, refactoring, reviewing, explaining, modeling, plotting, and lightly optimizing R, R Markdown, and Quarto code. Use whenever the user asks for R code, minimal R, Base R first analysis, R script cleanup, R code review, statistical modeling, report figures, Chinese ecological/statistical analysis scripts, or R workflow help. Internally route to the simplest mode without asking the user to choose. Prioritize direct Base R, flat top-to-bottom scripts, sparse comments, explicit missing-value handling where it matters, preserved outputs during refactors, and no unnecessary functions, packages, setup boilerplate, project scaffolds, tests, Shiny, renv, CI, Docker, or software-engineering abstractions unless explicitly requested.
+description: Unified minimal R suite for writing, refactoring, reviewing, explaining, modeling, plotting, and lightly optimizing R/Rmd/Quarto code. Use for any R request, especially Base R first scripts, statistical analysis, figures, R cleanup, and Chinese ecological/reporting workflows. Silently choose the simplest mode. Produce direct flat scripts with sparse comments, explicit missing-value handling only where it matters, and no packages, functions, project scaffolds, or engineering machinery unless needed or requested.
 ---
 
 # R Suite
@@ -11,9 +11,11 @@ Use one entry point for ordinary R work. Infer the needed mode from the user's r
 
 Do not present a menu of modes. Ask at most one clarification only when the missing detail changes the analysis result, such as an unknown outcome variable, grouping variable, input file, or model purpose.
 
+Primary optimization target: reduce code surface area without hiding the statistical workflow. Prefer deleting scaffolding over adding abstraction.
+
 ## Routing
 
-Choose the first matching mode silently:
+Choose the first matching mode silently. If several modes apply, use the one that produces the smallest useful output.
 
 1. **Tiny Task**: answer with the shortest direct R code.
 2. **Script**: write a flat top-to-bottom script.
@@ -32,15 +34,23 @@ When rules conflict, use this order:
 correct result > simplest readable code > Base R > named intermediates > native pipe > small package use > helper function > project structure
 ```
 
-## Default Output
+## Output Contract
 
-When writing R code:
+When writing a direct R answer:
 
 1. Show the code block immediately.
 2. Keep explanation outside code to at most two sentences unless the user asks for teaching, review, or interpretation.
 3. Write a script that runs from top to bottom.
 4. Print, plot, or save the result directly.
 5. Use comments only for analysis intent, assumptions, or manual judgment.
+
+When editing local files:
+
+1. Edit the file directly instead of pasting a replacement script.
+2. Keep the final response to changed files, verification, and any limitation.
+3. Do not paste the full code unless the user asks.
+
+When reviewing code, lead with findings. When explaining code, explain only the parts needed for the user's question.
 
 For a small task, return a small answer. A two-line script is better than a full workflow when two lines solve the problem.
 
