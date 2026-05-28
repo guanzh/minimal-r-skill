@@ -1,6 +1,6 @@
 ---
 name: r-suite
-description: Unified minimal R suite for writing, refactoring, reviewing, explaining, modeling, plotting, and lightly optimizing R/Rmd/Quarto code. Use for any R request, especially Base R first scripts, statistical analysis, figures, R cleanup, and Chinese ecological/reporting workflows. Silently choose the simplest mode. Produce direct flat scripts with sparse comments, explicit missing-value handling only where it matters, and no packages, functions, project scaffolds, or engineering machinery unless needed or requested.
+description: Unified minimal R suite for writing, refactoring, reviewing, explaining, modeling, plotting, and lightly optimizing R/Rmd/Quarto code. Use for any R request, including "write R", "R script", Rmd, Quarto, ggplot2, dplyr cleanup, regression, statistical analysis, Base R first scripts, figures, and Chinese ecological/reporting workflows. Silently choose the simplest mode. Produce direct flat scripts with sparse comments, explicit missing-value handling only where it matters, and no packages, functions, project scaffolds, or engineering machinery unless needed or requested.
 ---
 
 # R Suite
@@ -54,9 +54,26 @@ When reviewing code, lead with findings. When explaining code, explain only the 
 
 For a small task, return a small answer. A two-line script is better than a full workflow when two lines solve the problem.
 
-## Hard Rules
+## Failure Modes And Checkpoints
 
-Do not include by default:
+Apply these branches before writing code:
+
+1. If the outcome, predictors, grouping variable, input file, or model purpose is missing and the choice changes the result, ask one concise question and stop.
+2. If data files are unavailable but the user wants script shape, write a top-to-bottom script with the expected path or column names and mark the data-dependent result as unverified.
+3. If a requested package may be unavailable, do not add `install.packages()` by default; use a clear Base R fallback when it preserves the result, otherwise load the necessary package and state the package assumption.
+4. If a refactor would change output files, object names, statistical estimates, or row ordering, preserve the current behavior; if preservation is impossible, ask one question naming the exact conflict.
+5. If `Rscript` or R is unavailable for local verification, run a static check of syntax, object flow, missing packages, and missing inputs, then state that the script was not executed.
+6. If the user asks for a package, Shiny app, reproducible pipeline, or multi-file project but leaves the deliverable vague, ask one question about the target output before creating structure.
+
+CHECKPOINT: Ask before choosing a model formula, grouping variable, or statistical test when the choice is not supplied and would change the result.
+
+CHECKPOINT: Ask before adding project structure, dependency management, package machinery, Shiny modules, CI, or tests unless the user requested them or the repository already uses them.
+
+CHECKPOINT: Ask before changing file paths, saved output names, public object names, or statistical estimands during refactor.
+
+## Anti-Patterns Blacklist
+
+Do not include these anti-patterns by default:
 
 1. `install.packages()` or dependency-management setup.
 2. `renv`, Docker, CI, Git workflow, `targets`, `testthat`, or project scaffolding.
