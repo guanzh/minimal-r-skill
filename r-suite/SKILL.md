@@ -1,13 +1,13 @@
 ---
 name: r-suite
-description: Unified minimal R suite for writing, refactoring, reviewing, explaining, modeling, plotting, and lightly optimizing R/Rmd/Quarto code. Use for any R request, including "write R", "R script", Rmd, Quarto, ggplot2, dplyr cleanup, regression, statistical analysis, Base R first scripts, figures, and Chinese ecological/reporting workflows. Silently choose the simplest mode. Produce direct flat scripts with sparse comments, explicit missing-value handling only where it matters, and no packages, functions, project scaffolds, or engineering machinery unless needed or requested.
+description: Unified minimal R suite for writing, refactoring, reviewing, explaining, modeling, plotting, analysis recommendations, and lightly optimizing R/Rmd/Quarto code. Use for any R request, including "write R", "R script", "how else can I analyze this", Rmd, Quarto, ggplot2, dplyr cleanup, regression, statistical analysis, Base R first scripts, figures, and Chinese ecological/reporting workflows. Silently choose the simplest mode. Produce direct flat scripts and data-specific next-step advice without unnecessary packages, functions, scaffolds, or engineering machinery.
 ---
 
 # R Suite
 
 ## Goal
 
-Use one entry point for ordinary R work. Infer the needed mode from the user's request and produce the simplest correct R code or review.
+Use one entry point for ordinary R work. Infer the needed mode from the user's request and produce the simplest correct R code, review, or analysis advice.
 
 Do not present a menu of modes. Ask at most one clarification only when the missing detail changes the analysis result, such as an unknown outcome variable, grouping variable, input file, or model purpose.
 
@@ -22,9 +22,10 @@ Choose the first matching mode silently. If several modes apply, use the one tha
 3. **Refactor**: simplify existing code while preserving inputs, outputs, object names, and results where possible.
 4. **Review**: list only actionable issues; do not rewrite unless asked.
 5. **Model**: if outcome, predictors, grouping, or model purpose are unclear, ask one question; otherwise fit directly.
-6. **Plot**: use base plotting for quick checks, direct `ggplot2` for report figures.
-7. **Performance**: only when the user mentions speed, memory, large data, or optimization; measure or identify the bottleneck before changing style.
-8. **Project/Package/Shiny**: only when explicitly requested or already present in the repo; keep the structure minimal.
+6. **Analysis Advice**: recommend data-specific next analyses; use basic, intermediate, and advanced levels when the user asks for a roadmap.
+7. **Plot**: use base plotting for quick checks, direct `ggplot2` for report figures.
+8. **Performance**: only when the user mentions speed, memory, large data, or optimization; measure or identify the bottleneck before changing style.
+9. **Project/Package/Shiny**: only when explicitly requested or already present in the repo; keep the structure minimal.
 
 ## Priority
 
@@ -52,6 +53,8 @@ When editing local files:
 
 When reviewing code, lead with findings. When explaining code, explain only the parts needed for the user's question.
 
+When the user asks what else can be analyzed, give a compact data-specific roadmap. After a substantive analysis, proactively add up to three useful next analyses only when they follow from the known data structure. Do not append suggestions to trivial syntax or formatting tasks.
+
 For a small task, return a small answer. A two-line script is better than a full workflow when two lines solve the problem.
 
 ## Failure Modes And Checkpoints
@@ -64,6 +67,8 @@ Apply these branches before writing code:
 4. If a refactor would change output files, object names, statistical estimates, or row ordering, preserve the current behavior; if preservation is impossible, ask one question naming the exact conflict.
 5. If `Rscript` or R is unavailable for local verification, run a static check of syntax, object flow, missing packages, and missing inputs, then state that the script was not executed.
 6. If the user asks for a package, Shiny app, reproducible pipeline, or multi-file project but leaves the deliverable vague, ask one question about the target output before creating structure.
+7. If analysis advice lacks the unit of observation, key variables, or research purpose, ask one concise question or state the missing information; do not produce a generic methods catalog.
+8. If the data structure does not justify an advanced method, say so directly and recommend the prerequisite or simpler method instead.
 
 CHECKPOINT: Ask before choosing a model formula, grouping variable, or statistical test when the choice is not supplied and would change the result.
 
@@ -86,6 +91,9 @@ Do not include these anti-patterns by default:
 9. Forced `glue::glue()` when `paste()` or `paste0()` is simpler.
 10. Long comments that explain obvious syntax.
 11. Long preambles before code or long summaries after code.
+12. Generic lists of statistical methods that are not connected to the user's variables, design, or research question.
+13. Advanced methods recommended only because they sound sophisticated.
+14. Causal claims from observational associations or uncorrected fishing across many tests.
 
 ## Base R First
 
@@ -220,6 +228,33 @@ summary(fit)
 If the user has not specified the outcome, predictors, grouping, or model purpose, ask one concise clarification before writing a model.
 
 For `glm`, mixed models, Bayesian models, ecological community analysis, or spatial models, still keep the script linear. Use the package only for the necessary model call and the direct summary, prediction, or plot the user needs.
+
+## Analysis Advice
+
+Base recommendations on the user's actual data, code, summaries, or stated design. First identify what is known:
+
+1. Unit of observation and sample size.
+2. Outcome, predictors, groups, and variable types.
+3. Repeated measures, hierarchy, time, or spatial structure.
+4. Missingness, imbalance, outliers, and measurement limits.
+5. Research purpose: describe, compare, explain, predict, or monitor.
+
+When the user asks for an analysis roadmap, organize the few highest-value methods into:
+
+1. **Basic**: data quality, missingness, descriptive summaries, distributions, cross-tabs, and direct plots.
+2. **Intermediate**: group comparisons, regression, effect sizes, interactions, diagnostics, and stratified analysis.
+3. **Advanced**: only methods justified by the design, such as mixed models for hierarchy, GAM or time-series models for temporal patterns, spatial models for spatial dependence, ordination for multivariate community data, occupancy models for imperfect detection, or Bayesian models when they solve a specific need.
+
+For each recommendation, state:
+
+- **Question**: what it answers.
+- **Method**: the smallest suitable analysis.
+- **Why**: why it fits the known data.
+- **Needs**: required variables, assumptions, or design information.
+
+Keep each level to one to three recommendations. Rank by expected value, not sophistication. If no advanced method is justified, say that plainly instead of forcing one.
+
+When giving advice after completing an analysis, use a short `Next analyses` section with at most three items total. When the user chooses a method or asks for code, provide the smallest runnable R implementation first.
 
 ## Plotting
 
