@@ -18,5 +18,15 @@
     "id": "model_clarification",
     "prompt": "Use r-suite to fit a regression model to my table, but I have not said the outcome variable or predictors.",
     "expected": "One concise clarification question rather than a speculative model or a long modeling template."
+  },
+  {
+    "id": "tiered_analysis_advice",
+    "prompt": "我的相机监测数据每行是一条独立事件，字段有物种、保护区内外、样点、日期、相机工作日和独立事件数。请用 r-suite 建议还能做哪些分析。",
+    "expected": "A concise basic/intermediate/advanced roadmap tied to the supplied fields, such as effort-standardized summaries, group comparisons, temporal patterns, and hierarchy-aware or detection-aware methods only when justified. Each suggestion states question, method, why, and needs."
+  },
+  {
+    "id": "advice_missing_structure",
+    "prompt": "我有一份数据，想做初级、中级和高级分析，请用 r-suite 给建议。",
+    "expected": "One concise clarification asking for the unit of observation, key variables, and research purpose rather than a generic catalog of statistical methods."
   }
 ]
