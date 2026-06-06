@@ -198,6 +198,6 @@ Use `r-suite/` as the primary Codex skill. `minimal-r/` is retained as a legacy 
 
 This suite intentionally does not include scripts, templates, or large references. Its job is style control: keep R code direct, readable, and statistically auditable.
 
-`r-suite/test-prompts.json` is a small regression set for future optimization. Use it to check that updates still produce tiny Base R answers, direct refactors, and one-question clarification when modeling details are missing.
+`r-suite/test-prompts.json` is a small regression set for future optimization. Use it to check that updates still produce tiny Base R answers, direct refactors, one-question clarification when details are missing, and data-specific advice instead of generic method catalogs.
 
 It selectively borrows readable style practices from the tidyverse style guide, such as spacing, clear names, native pipes, sparse comments, and readable ggplot layout, while rejecting project-heavy defaults that would make small analysis scripts larger than needed.
