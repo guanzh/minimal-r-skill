@@ -1,6 +1,6 @@
 # R Suite
 
-`r-suite` is the recommended single entry point for R work. It merges the previous minimal R style, simple statistical scripting, review, refactoring, modeling, plotting, and light performance guidance into one skill so you do not need to choose among many R skills.
+`r-suite` is the recommended single entry point for R work. It combines minimal R scripting, review, refactoring, modeling, plotting, data-specific analysis recommendations, and light performance guidance so you do not need to choose among many R skills.
 
 It prioritizes:
 
@@ -9,6 +9,7 @@ It prioritizes:
 - Sparse comments
 - Explicit missing-value handling where it matters
 - Direct printed, plotted, or saved output
+- Data-specific basic, intermediate, and advanced analysis suggestions
 - Minimal helper functions
 - No `install.packages()` boilerplate
 - No unnecessary defensive programming or software-engineering structure
@@ -39,6 +40,10 @@ Use r-suite to simplify this R script. Keep the output the same.
 用 r-suite 写一个 R 脚本，读取 Excel 表格并统计各物种的独立事件数。
 ```
 
+```text
+用 r-suite 根据我的数据结构，建议初级、中级和高级分析方法。
+```
+
 ## What It Changes
 
 `r-suite` pushes the agent toward small analyst scripts instead of engineered R projects.
@@ -49,6 +54,7 @@ Use r-suite to simplify this R script. Keep the output the same.
 | Summarize by group | Loads the full `tidyverse`, builds a reusable pipeline, adds extra checks | Uses Base R `aggregate()` or a short direct `dplyr` summary only when clearer |
 | Refactor a script | Splits one analysis into functions, config blocks, and helper files | Keeps one readable top-to-bottom script and removes unnecessary abstraction |
 | Review R code | Rewrites the whole file immediately | Lists only actionable issues unless you ask for a rewrite |
+| Recommend analyses | Dumps a generic list of statistical methods | Connects a few basic, intermediate, and advanced methods to the actual variables and study design |
 
 ### Example 1: Mean Value
 
@@ -151,6 +157,22 @@ p <- ggplot(d, aes(group, score)) +
 p
 ggsave("score_by_group.png", p, width = 7, height = 5)
 ```
+
+### Example 4: Analysis Advice
+
+Prompt:
+
+```text
+我的相机监测数据包含物种、保护区内外、样点、日期、相机工作日和独立事件数。还能做哪些分析？
+```
+
+`r-suite` gives a short, data-specific roadmap:
+
+- **Basic**: check effort and missingness; summarize effort-standardized event rates; plot species and temporal patterns.
+- **Intermediate**: compare protected versus unprotected sites with effect sizes; model event rates while controlling for effort and site.
+- **Advanced**: consider mixed models for repeated sites or occupancy models only when repeat-survey and detection data support them.
+
+Each recommendation states the question, method, why it fits, and what additional information it needs. It does not force an advanced method when the design cannot support one.
 
 ## Repository Layout
 
